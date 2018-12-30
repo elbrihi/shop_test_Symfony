@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="small-12 large-8 columns">
+
+        <h1>Shopping Cart</h1>
+        <form action="{{ path('foggyline_sales_cart_update')}}"  method="post">
+        <table>
+            <thead> 
+                <tr>    
+                    <th>Item </th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>    
+                    <td>{{item.product.title}}</td>
+                    <td>{{item.product.price}}</td>
+                    <td><input name="item[{{ item.id }}]" value="{{ item.qty }}"/></td>
+                    <td>{{item.product.price * item.Qty}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            <button type="submit" class="button">Update Cart</button>
+        </form>
+        </div>
+        <div class="large-4 columns">
+                <div>Order Total: {{ total }}</div>
+                <div><a href="{{ path('foggyline_sales_checkout') }}"
+                    class="button">Go to Checkout</a></div>
+                </div>
+        </div>
+    </div>
+
+  Here17    
+    <script type="text/javascript">
+    console.log(5);
+      /*  var form = document.getElementById('shipping_form');
+        document.getElementById('shipping_form_submit').addEventListener('click', function () {
+            form.submit();
+        });*/
+    </script>
+{% endblock %}

@@ -1,0 +1,64 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        in_memory:
+            memory:     
+                users:
+                    yassine:        
+                        password: #yassine
+                                $2y$12$BnRHDeuu.AnSvm3S8RIskeTopvYPB3DSv23ihjB2tABtqz8qReCW2
+                        roles: 'ROLE_ADMIN'
+        foggyline_customer:
+                entity:
+                    class: FoggylineCustomerBundle:Customer
+                    property: username
+                    
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+        Foggyline\CustomerBundle\Entity\Customer:
+            algorithm: bcrypt
+            cost: 12
+    firewalls:
+        guard_new_edit:
+            pattern: /(new)|(edit)
+            methods: [GET, POST]
+            anonymous: ~
+            http_basic: ~
+        guard_delete:
+            pattern: /
+            methods: [DELETE]
+            anonymous: ~
+            http_basic: ~
+        foggyline_customer:
+            anonymous: ~
+            provider: foggyline_customer
+            form_login:
+                login_path: foggyline_customer_login
+                check_path: foggyline_customer_login
+                default_target_path: customer_account
+            logout:
+                path:   /customer/logout
+                target: /
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+    
+    access_control:
+       - {path:  /new, roles: ROLE_ADMIN}
+       - {path:  /edit, roles: ROLE_ADMIN}
+       - {path:  /, roles: ROLE_ADMIN, methods: [DELETE] }
+       - { path: customer/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: customer/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: customer/forgotten_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: customer/account, roles: ROLE_USER }
+       - { path: customer/logout, roles: ROLE_USER }
+

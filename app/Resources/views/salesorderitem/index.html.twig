@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Salesorderitems list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Qty</th>
+                <th>Unitprice</th>
+                <th>Totalprice</th>
+                <th>Createdat</th>
+                <th>Modifiedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salesOrderItem in salesOrderItems %}
+            <tr>
+                <td><a href="{{ path('salesorderitem_show', { 'id': salesOrderItem.id }) }}">{{ salesOrderItem.id }}</a></td>
+                <td>{{ salesOrderItem.title }}</td>
+                <td>{{ salesOrderItem.qty }}</td>
+                <td>{{ salesOrderItem.unitPrice }}</td>
+                <td>{{ salesOrderItem.totalPrice }}</td>
+                <td>{% if salesOrderItem.createdAt %}{{ salesOrderItem.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if salesOrderItem.modifiedAt %}{{ salesOrderItem.modifiedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('salesorderitem_show', { 'id': salesOrderItem.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('salesorderitem_edit', { 'id': salesOrderItem.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('salesorderitem_new') }}">Create a new salesOrderItem</a>
+        </li>
+    </ul>
+{% endblock %}

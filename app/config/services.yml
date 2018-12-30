@@ -1,0 +1,21 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    category_menu:
+        class: AppBundle\Service\Menu\Category
+    customer_menu:
+        class: AppBundle\Service\Menu\Customer
+    checkout_menu:
+        class: AppBundle\Service\Menu\CheckoutMenu
+    bestsellers:
+        class: AppBundle\Service\Menu\BestSellers
+    products_onsale:
+        class: AppBundle\Service\Menu\OnSale
+    add_to_cart_url:
+        class: AppBundle\Service\Menu\AddToCartUrl

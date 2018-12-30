@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="foggyline_payment_homepage" path="/">
+        <default key="_controller">FoggylinePaymentBundle:Default:index</default>
+    </route>
+    
+    <route id="foggyline_payment_card_authorize" path="/card/authorize">
+        <default key="_controller">FoggylinePaymentBundle:Card:authorize</default>
+    </route>
+
+    <route id="foggyline_payment_card_capture" path="/card/capture">
+        <default key="_controller">FoggylinePaymentBundle:Card:capture</default>
+    </route>
+
+    <route id="foggyline_payment_card_cancel" path="/card/cancel">
+        <default key="_controller">FoggylinePaymentBundle:Card:cancel</default>
+    </route>
+
+</routes>

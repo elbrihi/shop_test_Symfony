@@ -1,0 +1,4 @@
+services:
+#    foggyline_shipment.example:
+#        class: Foggyline\ShipmentBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Salesorderitem</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ salesOrderItem.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ salesOrderItem.title }}</td>
+            </tr>
+            <tr>
+                <th>Qty</th>
+                <td>{{ salesOrderItem.qty }}</td>
+            </tr>
+            <tr>
+                <th>Unitprice</th>
+                <td>{{ salesOrderItem.unitPrice }}</td>
+            </tr>
+            <tr>
+                <th>Totalprice</th>
+                <td>{{ salesOrderItem.totalPrice }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if salesOrderItem.createdAt %}{{ salesOrderItem.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modifiedat</th>
+                <td>{% if salesOrderItem.modifiedAt %}{{ salesOrderItem.modifiedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('salesorderitem_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('salesorderitem_edit', { 'id': salesOrderItem.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

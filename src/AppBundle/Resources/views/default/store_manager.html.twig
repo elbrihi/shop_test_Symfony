@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+   {% block body %}
+<h1>Store Manager</h1>
+<div class="row">
+    <div class="large-6 columns">
+        <div class="stacked button-group">
+            <a href="{{ path('category_new') }}" class="button">Add new
+                Category</a>
+            <a href="{{ path('product_new') }}" class="button">Add new
+                Product</a>
+            <a href="{{ path('customer_new') }}" class="button">Add new
+                Customer</a>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <div class="stacked button-group">
+            <a href="{{ path('category_index') }}" class="button">List &
+                Manage Categories</a>
+            <a href="{{ path('product_index') }}" class="button">List &
+                Manage Products</a>
+            <a href="{{ path('customer_index') }}" class="button">List &
+                Manage Customers</a>
+            <a href="{{ path('salesorder_index') }}" class="button">List
+                & Manage Orders</a>
+        </div>
+    </div>
+</div>
+   {% endblock %}

@@ -1,0 +1,2 @@
+parameters:
+  foggyline_catalog_images_directory: "%kernel.root_dir%/../web/uploads/foggyline_catalog_images"
