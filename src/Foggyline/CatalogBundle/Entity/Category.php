@@ -50,7 +50,12 @@ class Category
      * @Assert\File(mimeTypes={"image/png","image/jpeg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
      */
     private $image;
-
+    /**
+     * 
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Foggyline\UserBundle\Entity\User",inversedBy="categories")
+     */
+    private $user ;
     /** 
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
      */
@@ -180,6 +185,21 @@ class Category
     public function getImage()
     {
         return $this->image;
+    }
+    /**
+     * @param user
+     * 
+     * @return category 
+     */
+    public function setUser(\Foggyline\UserBundle\Entity\User $user=null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+    public function getUser()
+    {
+        return $this->user ;
     }
     public function __toString()
     {

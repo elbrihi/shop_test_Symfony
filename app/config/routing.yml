@@ -1,3 +1,12 @@
+foggyline_user_user:
+    resource: "@FoggylineUserBundle/Controller/UserController.php"
+    type:     annotation
+
+foggyline_user:
+    resource: "@FoggylineUserBundle/Resources/config/routing.xml"
+    prefix:   /user/
+
+
 
 foggyline_sales:
     resource: "@FoggylineSalesBundle/Resources/config/routing.xml"

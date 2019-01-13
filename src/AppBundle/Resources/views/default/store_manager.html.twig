@@ -18,10 +18,16 @@
                 Manage Categories</a>
             <a href="{{ path('product_index') }}" class="button">List &
                 Manage Products</a>
-            <a href="{{ path('customer_index') }}" class="button">List &
+            <a href="{{ path('customer_index', {id:'id'}) }}" class="button">List &
                 Manage Customers</a>
-            <a href="{{ path('salesorder_index') }}" class="button">List
-                & Manage Orders</a>
+            <a href="{#{ path('salesorder_index', {id_user : ''}) }#}" class="button">List
+                & Manage Orders
+            </a>
+             <a href="{{ path('user_edit', {'id': id_user}) }}" class="button">List
+                & Manage Users
+            </a>
+            
+          {{ id_user }}
         </div>
     </div>
 </div>

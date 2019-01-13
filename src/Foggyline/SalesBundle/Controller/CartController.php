@@ -40,18 +40,24 @@ class CartController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             $cart = $em->getRepository('FoggylineSalesBundle:Cart')->findOneBy(array('customer'=>$customer->getId()));
-            /**
+            $total = 0;
+            $items  = array();
+            if(!empty($cart))
+            {
+                                /**
              * Attempted to call an undefined method named "getUniPrice" of class "Foggyline\SalesBundle\Entity\CartItem"
              * .Did you mean to call e.g. "getUnitPrice" or "setUnitPrice"?
              */
           //  print_r($cart->getItems());
-             $items = $items = $cart->getItems();
+            $items = $cart->getItems();
            
-            $total = 0;
+            
             foreach($items as $item)
             {
                 $total  = $total  + $item->getQty() * $item->getUnitPrice();;
             }
+            }
+
         }
         else
         {

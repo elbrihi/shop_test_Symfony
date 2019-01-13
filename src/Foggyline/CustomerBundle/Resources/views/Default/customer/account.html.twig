@@ -43,24 +43,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for order in customer_orders %}
+                
+                    {{ dump(customer_orders) }}
                   
-                    <tr>
-                        
-                        <td>{{ order.id }}</td>
-                        <td>{{ order.date }}</td>
-                        <td>{{ order.ship }}</td>
-                        <td>{{ order.orderTotal }}</td>
-                        <td>{{ order.status }}</td>
-                        <td>
-                        
-                            {% for order in  order.action %}
-                               {#{ order.lebel }} {{ order.path }#}
-                               <a class="button" href="{{ order.path }}"> {{ order.lebel }}</a>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                    {% endfor %}
+                    {% if  customer_orders   %}
+                        {% for order in customer_orders %}
+                    
+                        <tr>
+                            
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>{{ order.ship }}</td>
+                            <td>{{ order.orderTotal }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>
+                            
+                                    {% for order in  order.action %}
+                                <!--    {{ order.lebel }} {{ order.path }} -->
+                                    <a class="button" href="{{ order.path }}"> {{ order.lebel }}</a>
+                                    {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                   {% endif %}
+
                 </tbody>
             </table>
         </div>

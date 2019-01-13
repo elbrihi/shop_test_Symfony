@@ -27,10 +27,11 @@ class CustomerController extends Controller
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-      
+        
         // last username entered by the user
-    
+        
         $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render(
             'FoggylineCustomerBundle:default:customer/login.html.twig',
             array(
@@ -66,7 +67,7 @@ class CustomerController extends Controller
            
             $em->flush();
           
-         //   return $this->redirectToRoute('customer_show', array('id' => $user->getId()));
+            return $this->redirectToRoute('customer_show', array('id' => $user->getId()));
         }
 
         return $this->render('FoggylineCustomerBundle:default:customer/register.html.twig', array(
@@ -103,14 +104,14 @@ class CustomerController extends Controller
            }
            $etems = $this->get('foggyline_sales.customer_orders')->getOrders();
            //echo '<pre>';
-           // print_r($etems);
-         //  die;
+           print_r($etems);
+           //die;
            return $this->render('FoggylineCustomerBundle:default:customer/account.html.twig',
                     array(
                         'customer'=>$customer,
                         'form'=>$editForm->createView(),
-                        'customer_orders' => $this->get('foggyline_customer.customer_orders')->getOrders(),
-                        //'customer_orders' =>$etems,
+                        //'customer_orders' => $this->get('foggyline_customer.customer_orders')->getOrders(),
+                        'customer_orders' =>$etems,
                         )
                 );
 

@@ -20,7 +20,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-       
+        
         $checkout = $this->get('foggyline_sales.checkout_menu');
 
         echo '<pre>';

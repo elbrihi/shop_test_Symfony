@@ -21,6 +21,10 @@
             <argument type="service" id="router" />
         </service>
 
+        <service id="foggyline_catalog.category_voter" class="Foggyline\CatalogBundle\Security\CategoryVoter">
+            <tag name="security.voter" /> 
+        </service>
+
     </services>
 
 </container>

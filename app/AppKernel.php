@@ -21,6 +21,9 @@ class AppKernel extends Kernel
             new Foggyline\PaymentBundle\FoggylinePaymentBundle(),
             new Foggyline\ShipmentBundle\FoggylineShipmentBundle(),
             new Foggyline\SalesBundle\FoggylineSalesBundle(),
+            new Foggyline\UserBundle\FoggylineUserBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

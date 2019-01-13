@@ -27,8 +27,9 @@ class CustomerOrders
      */
     public function getOrders()
     {
+        $orders = array();
 
-        if($customer = $this->token->getUser())
+        if($customer = $this->token->getUser())   
         {
            
           $salesOrders = $this->em->getRepository('FoggylineSalesBundle:SalesOrder')->findBy(

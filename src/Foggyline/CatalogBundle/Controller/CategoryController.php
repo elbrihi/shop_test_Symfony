@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
+use Foggyline\CatalogBundle\Security\CategoryVoter;
 /**
+ * 
  * Category controller.
  *
  * @Route("category")
@@ -55,7 +57,9 @@ class CategoryController extends Controller
             
             $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
             $category->setImage($name);
-        }
+            }
+            $category->setImage($name);
+            $category->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
@@ -77,6 +81,16 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {
+    
+       // dump($this->getUser());
+       //dump($category->getUser())
+       if($this->getUser()===$category->getUser())
+       {
+          // echo 'nice';
+           //die;
+       }
+      
+
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('FoggylineCatalogBundle:default:category/show.html.twig', array(
@@ -93,6 +107,7 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        
        $existingImage=$category->getImage();
 
        if($existingImage)

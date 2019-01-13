@@ -123,8 +123,8 @@ class CheckoutController extends Controller
     public function processAction(Request $request)
     {
         if($customer = $this->getUser() )
-        {
-
+        { 
+           
             $salesOrder = new SalesOrder();
             $now = new \DateTime();
             $em = $this->getDoctrine()->getManager();
