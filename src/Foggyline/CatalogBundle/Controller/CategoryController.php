@@ -82,11 +82,12 @@ class CategoryController extends Controller
     public function showAction(Category $category)
     {
     
+        
        // dump($this->getUser());
-       //dump($category->getUser())
+       //dump($category->getUser());
        if($this->getUser()===$category->getUser())
        {
-          // echo 'nice';
+           //echo 'nice';
            //die;
        }
       

@@ -39,7 +39,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         foggyline_user:
-            pattern: ^/(user|store_manager|/customer/register|)
+            pattern: ^/(user|store_manager|category|product)
             anonymous: ~
             provider: foggyline_user
             form_login:
@@ -89,8 +89,8 @@ security:
        #- { path: customer/logout, roles: ROLE_USER }
 
        #   Test #
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: /new, roles: ROLE_USER }
+
+        - { path: /new, roles: ROLE_MODERATOR }
         - { path: /edit, roles: ROLE_ADMIN }
         - { path: /edit, roles: ROLE_USER }
         - { path: /, roles: ROLE_USER, methods: [DELETE] }

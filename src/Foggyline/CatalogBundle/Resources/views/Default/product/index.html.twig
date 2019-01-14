@@ -32,12 +32,15 @@
                 <td>{{ product.image }}</td>
                 <td>
                     <ul>
+                        
                         <li>
                             <a href="{{ path('product_show', { 'id': product.id }) }}">show</a>
                         </li>
+                        {% if is_granted('edit',product) %}
                         <li>
                             <a href="{{ path('product_edit', { 'id': product.id }) }}">edit</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -46,8 +49,12 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('product_new') }}">Create a new product</a>
-        </li>
+        {% for product in products %}
+            {% if is_granted('new', product) %}
+            <li>
+                <a href="{{ path('product_new') }}">Create a new product</a>
+            </li>
+            {% endif %}
+        {% endfor %}
     </ul>
 {% endblock %}

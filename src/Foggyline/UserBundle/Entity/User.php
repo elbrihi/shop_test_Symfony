@@ -51,7 +51,13 @@ class User Implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Foggyline\CatalogBundle\Entity\Category", mappedBy="user")
      */
     private $categories ;
-
+    
+    /**
+     * 
+     * @ORM\OneToMany(targetEntity="Foggyline\CatalogBundle\Entity\Product", mappedBy="user")
+     * 
+     */
+    private $products ; 
 
     private $plainPassword;
 
@@ -77,6 +83,7 @@ class User Implements UserInterface, \Serializable
     {
         
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

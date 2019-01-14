@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Foggyline\CatalogBundle\Security\ProductVoter;
 
 /**
  * Product controller.
@@ -55,11 +56,13 @@ class ProductController extends Controller
             
                 $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
                 $product->setImage($name);
+                $product->setUser($this->getUser());
             }
+      die;
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
-
+           
             return $this->redirectToRoute('product_show', array('id' => $product->getId()));
         }
 
@@ -77,6 +80,14 @@ class ProductController extends Controller
      */
     public function showAction(Product $product)
     {
+      
+        //dump($product->getUser());
+        if($this->getUser()===$product->getUser())
+        {
+            //echo 'nice';
+            
+        }
+     //   die;
         $deleteForm = $this->createDeleteForm($product);
 
         return $this->render('FoggylineCatalogBundle:default:product/show.html.twig', array(

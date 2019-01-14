@@ -25,6 +25,10 @@
             <tag name="security.voter" /> 
         </service>
 
+        <service id="foggyline_catalog.product_voter" class="Foggyline\CatalogBundle\Security\ProductVoter">
+            <tag name="security.voter" /> 
+        </service>
+
     </services>
 
 </container>

@@ -2,14 +2,14 @@
 
 namespace Foggyline\CatalogBundle\Security;
 
-use Foggyline\CatalogBundle\Entity\Category; 
+use Foggyline\CatalogBundle\Entity\Product; 
 use Foggyline\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 
 
-class CategoryVoter extends Voter
+class ProductVoter extends Voter
 {
     const VIEW = 'view';
     const EDIT = 'edit';
@@ -24,7 +24,7 @@ class CategoryVoter extends Voter
         }
 
         // only vote on Post objects inside this voter
-        if (!$subject instanceof Category) {
+        if (!$subject instanceof Product) {
             return false;
         }
 

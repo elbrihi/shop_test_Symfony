@@ -70,12 +70,19 @@ class Product
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+    
+    /**
+     * 
+     * @ORM\ManyToOne(targetEntity="Foggyline\UserBundle\Entity\User", inversedBy="products")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user ;
 
     /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255)
-     *@Assert\File(mimeTypes={"image/png","image/jpeg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
+     *@Assert\File(mimeTypes={"image/png","image/jpeg","image/jpg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
      */
     
     private $image;
@@ -86,6 +93,10 @@ class Product
      * @return int
      */
    
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     public function getId()
     {
         return $this->id;
@@ -281,6 +292,23 @@ class Product
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function setUser(\Foggyline\UserBundle\Entity\User $user=null):self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
 
