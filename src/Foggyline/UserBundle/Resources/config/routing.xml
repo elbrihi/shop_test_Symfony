@@ -7,4 +7,21 @@
     <route id="foggyline_user_homepage" path="/">
         <default key="_controller">FoggylineUserBundle:Default:index</default>
     </route>
+
+    <route id="foggyline_user_fetch_user" path="/fetch/">
+        <default key="_controller">FoggylineUserBundle:Default:fetch</default>
+    </route>
+
+    <route id="foggyline_user_edit_user" path="/edit/">
+        <default key="_controller">FoggylineUserBundle:Default:edit</default>
+    </route>
+    <route id="foggyline_user_add_user" path="/add/">
+        <default key="_controller">FoggylineUserBundle:Default:add</default>
+    </route>
+
+    <route id="foggyline_user_delete_user" path="/delete/">
+        <default key="_controller">FoggylineUserBundle:Default:delete</default>
+    </route>
+    
+    
 </routes>

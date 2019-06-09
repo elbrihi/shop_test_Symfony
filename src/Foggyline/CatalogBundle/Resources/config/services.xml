@@ -16,6 +16,23 @@
             <argument type="service" id="router" />
         </service>
 
+        <service id="foggyline_catalog.category_fetch" class="Foggyline\CatalogBundle\Service\Menu\FetchCategory">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="security.authorization_checker" />
+        </service>
+
+        <service id="foggyline_product.product_fetch" class="Foggyline\CatalogBundle\Service\Menu\FetchProduct">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="security.authorization_checker" />
+        </service>
+        <service id="foggyline_product.fetch" class="Foggyline\ProductBundle\Service\Menu\FetchProduct">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="security.authorization_checker" />
+        </service>
+
         <service id="foggyline_catalog.onSale" class="Foggyline\CatalogBundle\Service\Menu\OnSale">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="router" />

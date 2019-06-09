@@ -33,13 +33,14 @@ security:
         Foggyline\UserBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
+    
     firewalls:
 
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         foggyline_user:
-            pattern: ^/(user|store_manager|category|product)
+            pattern: ^/(user|store_manager|category|product|catalog)
             anonymous: ~
             provider: foggyline_user
             form_login:
@@ -90,8 +91,9 @@ security:
 
        #   Test #
 
-        - { path: /new, roles: ROLE_MODERATOR }
-        - { path: /edit, roles: ROLE_ADMIN }
+        - { path: /new, roles: ROLE_ADMIN }
+        - { path: /edit, roles: ROLE_ADMIN }   
+        - { path: /fetch, roles: ROLE_ADMIN }
         - { path: /edit, roles: ROLE_USER }
         - { path: /, roles: ROLE_USER, methods: [DELETE] }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

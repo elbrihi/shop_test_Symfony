@@ -24,6 +24,10 @@ class UserController extends Controller
      */
     public function indexAction()
     {
+        $request = new Request();
+        $user = $this->get('foggyline_user.fetch_user')->get_total_all_records();
+        
+        //die;
         
         $em = $this->getDoctrine()->getManager();
 
@@ -40,6 +44,8 @@ class UserController extends Controller
      */
     public function loginAction(Request $request)
     {
+
+        
         $authenticationUtils = $this->get('security.authentication_utils');
         
       
@@ -63,6 +69,7 @@ class UserController extends Controller
      */
     public function registrationActin(Request $request)
     {
+ 
        $user = new User();
        $em = $this->getDoctrine()->getManager();
 
@@ -91,6 +98,8 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
+
+        
         $user = new User();
         $form = $this->createForm('Foggyline\UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
@@ -117,6 +126,7 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
+       
         $deleteForm = $this->createDeleteForm($user);
 
         return $this->render('FoggylineUserBundle:default:user/show.html.twig', array(
@@ -124,6 +134,7 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+  
 
     /**
      * Displays a form to edit an existing user entity.
@@ -133,11 +144,11 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        die('UserController');
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('Foggyline\UserBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
-        dump($request);
-      //  die;
+       
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

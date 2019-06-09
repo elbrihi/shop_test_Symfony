@@ -5,9 +5,7 @@ foggyline_user_user:
 foggyline_user:
     resource: "@FoggylineUserBundle/Resources/config/routing.xml"
     prefix:   /user/
-
-
-
+    
 foggyline_sales:
     resource: "@FoggylineSalesBundle/Resources/config/routing.xml"
     prefix:   /sales/

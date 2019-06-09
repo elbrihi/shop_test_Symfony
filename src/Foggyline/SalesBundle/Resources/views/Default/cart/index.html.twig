@@ -1,42 +1,88 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="row">
-        <div class="small-12 large-8 columns">
+	<!-- top Products -->
+	<div class="ads-grid_shop">
+		<div class="shop_inner_inf">
+			<div class="privacy about">
+				<h3>Chec<span>kout</span></h3>
 
-        <h1>Shopping Cart</h1>
-        <form action="{{ path('foggyline_sales_cart_update')}}"  method="post">
-        <table>
-            <thead> 
-                <tr>    
-                    <th>Item </th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>    
-                    <td>{{item.product.title}}</td>
-                    <td>{{item.product.price}}</td>
-                    <td><input name="item[{{ item.id }}]" value="{{ item.qty }}"/></td>
-                    <td>{{item.product.price * item.Qty}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-            <button type="submit" class="button">Update Cart</button>
-        </form>
-        </div>
-        <div class="large-4 columns">
-                <div>Order Total: {{ total }}</div>
-                <div><a href="{{ path('foggyline_sales_checkout') }}"
-                    class="button">Go to Checkout</a></div>
-                </div>
-        </div>
-    </div>
+				<div class="checkout-right">
+					<h4>Your shopping cart contains: <span>3 Products</span></h4>
+					<form action="{{ path('foggyline_sales_cart_update')}}"  method="post">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>SL No.</th>
+								<th>Product</th>
+								<th>Quality</th>
+								<th>Product Name</th>			
+								<th>Price</th>
+								<th>SubTotal</th>
 
-  Here17    
+								<!--th>Remove</th-->
+							</tr>
+						</thead>
+						<tbody>
+							
+						 {% for item in items %}
+						
+							<tr class="rem1">
+								<td class="invert">1</td>
+								<td class="invert-image"><a href="single.html"><img  src="{{ asset('uploads/foggyline_catalog_images/' ~ item.product.image) }}" alt=" " class="img-responsive"></a></td>
+								<td class="invert">
+									<div class="quantity">
+										<input name="item[{{ item.id }}]" value="{{ item.qty }}"/>
+										<!--div class="quantity-select">
+											<div class="entry value-minus">&nbsp;</div>
+											<input name="item[{#{ item.id }#}]" value="{#{ item.qty }#}"/>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div-->
+									</div>
+								</td>
+								<td class="invert">{{item.product.title}}</td>
+								<td class="invert">${{item.product.price}}</td>
+								<td class="invert">${{item.product.price * item.Qty}}</td>
+								<!--td class="invert">
+									<div class="rem">
+										<div class="close1"> </div>
+									</div>
+								</td-->
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					<div ="update-button">
+						<button type="submit" class="button">Update Cart</button>
+					</div>
+					</form>
+				</div>
+				
+				<div class="checkout-left">
+					<div class="col-md-4 checkout-left-basket">
+						<h4>Continue to basket</h4>
+						<ul>
+							<!--li>Product1 <i>-</i> <span>$675.00 </span></li>
+							<li>Product2 <i>-</i> <span>$325.00 </span></li>
+							<li>Product3 <i>-</i> <span>$405.00 </span></li>
+							<li>Total Service Charges <i>-</i> <span>$55.00</span></li-->
+							<li>Total <i>-</i> <span>{{ total }}</span></li>
+							<div><a href="{{ path('foggyline_sales_checkout') }}"
+								class="button">Go to Checkout</a></div>
+							</div>
+						</ul>
+					</div>
+					<div class="clearfix"> </div>
+
+
+				</div>
+			</div>
+		</div>
+		<!-- //top products -->
+
+
+			<div class="clearfix"> </div>
+		</div>
+	</div>    
     <script type="text/javascript">
     console.log(5);
       /*  var form = document.getElementById('shipping_form');

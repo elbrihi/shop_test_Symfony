@@ -44,14 +44,17 @@ class CartController extends Controller
             $items  = array();
             if(!empty($cart))
             {
-                                /**
+            /**
              * Attempted to call an undefined method named "getUniPrice" of class "Foggyline\SalesBundle\Entity\CartItem"
              * .Did you mean to call e.g. "getUnitPrice" or "setUnitPrice"?
              */
-          //  print_r($cart->getItems());
+        
             $items = $cart->getItems();
            
-            
+           // var_dump($cart->getImage());
+
+            //die;
+       
             foreach($items as $item)
             {
                 $total  = $total  + $item->getQty() * $item->getUnitPrice();;
@@ -63,6 +66,8 @@ class CartController extends Controller
         {
             return $this->redirect('/');
         }
+        
+
         return  $this->render('FoggylineSalesBundle:default:cart/index.html.twig',
             array( 
                    'items'=>$items,

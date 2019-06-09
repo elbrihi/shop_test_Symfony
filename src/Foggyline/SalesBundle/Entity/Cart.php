@@ -48,6 +48,7 @@ class Cart
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
      */
     private $items;
+    
     public function __construct()
     {
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();

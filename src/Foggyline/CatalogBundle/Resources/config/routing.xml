@@ -7,4 +7,23 @@
     <route id="foggyline_catalog_homepage" path="/">
         <default key="_controller">FoggylineCatalogBundle:Default:index</default>
     </route>
+
+    <route id="foggyline_catalog_fetch_catalog" path="/fetch">
+        <default key="_controller">FoggylineCatalogBundle:Default:fetch</default>
+    </route>
+
+    <route id="foggyline_catalog_update_catalog_category" path="/edit/">
+        <default key="_controller">FoggylineCatalogBundle:AjaxCategory:edit</default>
+    </route>
+    <route id="foggyline_catalog_update_catalog_categoryGet" path="/{id}/edit">
+        <default key="_controller">FoggylineCatalogBundle:AjaxCategory:edit</default>
+    </route>
+
+    <route id="foggyline_catalog_add_catalog_category" path="/add">
+        <default key="_controller">FoggylineCatalogBundle:AjaxCategory:add</default>
+    </route>
+
+    <route id="foggyline_catalog_fetch_catalog_category" path="/fetch">
+        <default key="_controller">FoggylineCatalogBundle:AjaxCategory:fetch</default>
+    </route>
 </routes>

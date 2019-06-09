@@ -1,21 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Product edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('product_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+<div class="modal-dialog">
+    <form method="post" id="product_form_edit">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-plus"></i> Edit Category</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form_edit) }}
+                {{ form_row(form_edit) }}
+                
+                
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="product_id" id="product_id"/>
+                <input type="hidden" name="btn_action" id="btn_action"/>
+                <input type="submit" name="action" id="action" class="btn btn-info" value="Edit" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </form>
+</div>

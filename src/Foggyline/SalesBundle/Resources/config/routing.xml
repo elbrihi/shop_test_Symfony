@@ -15,6 +15,7 @@
     <route id="foggyline_sales_cart" path="/cart/" >
         <default key="_controller">FoggylineSalesBundle:Cart:index</default>
     </route>
+    
     <route id="foggyline_sales_cart_update" path="/cart/update/" >
         <default key="_controller">FoggylineSalesBundle:Cart:update</default>
     </route>

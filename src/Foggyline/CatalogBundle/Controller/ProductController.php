@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Foggyline\CatalogBundle\Security\ProductVoter;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Product controller.
@@ -24,12 +26,10 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
+        
         $products = $this->get('foggyline_catalog.onSale')->getItems();
 
-        echo '<pre>'; 
-        print_r($products);       
-        echo '</pre>';
-       // die;
+      
         $em = $this->getDoctrine()->getManager();
 
         $products = $em->getRepository('FoggylineCatalogBundle:Product')->findAll();
@@ -40,6 +40,18 @@ class ProductController extends Controller
     }
 
     /**
+     * Lists all product entities.
+     *
+     * @Route("/fetch", name="product_fetch")
+     */
+    public function fetchAction()
+    {
+        $product = $this->get('foggyline_product.product_fetch')->getProductData();
+        
+       // return new Response($category);
+         return new Response($product );
+    }
+    /**
      * Creates a new product entity.
      *
      * @Route("/new", name="product_new")
@@ -47,10 +59,12 @@ class ProductController extends Controller
      */
     public function newAction(Request $request)
     {
+        
         $product = new Product();
         $form = $this->createForm('Foggyline\CatalogBundle\Form\ProductType', $product);
         $form->handleRequest($request);
-
+        
+    
         if ($form->isSubmitted() && $form->isValid()) {
             if ($image = $product->getImage()) {
             
@@ -58,7 +72,7 @@ class ProductController extends Controller
                 $product->setImage($name);
                 $product->setUser($this->getUser());
             }
-      die;
+      
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -71,7 +85,49 @@ class ProductController extends Controller
             'form' => $form->createView(),
         ));
     }
+       /**
+     * Creates a new product entity.
+     *
+     * @Route("/add", name="product_add")
+     */
+    public function addAction(Request $request)
+    {
+        
+        $product = new Product();
+        $image = $product->getImage();
+       
+        $form = $this->createForm('Foggyline\CatalogBundle\Form\ProductType', $product);
+        $form->handleRequest($request);
+    
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+ 
+           if($user = $this->getUser())
+           {
+            $product->setUser($user);
+           }
+           /* @var $image \Symfony\Component\HttpFoundation\File\UploadedFile */
+           if ($image = $product->getImage()) {
+            
+            $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
+            $product->setImage($name);
+            }
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            
+            $em->flush();
+            
+            //return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            return new Response('the category form was added with succefully!!');
+        }
+        
+        return $this->render('FoggylineCatalogBundle:default:product/new.html.1.twig', array(
+            'product' => $product,
+            'form' => $form->createView(),
+        ));
+        
+    }
     /**
      * Finds and displays a product entity.
      *
@@ -106,15 +162,20 @@ class ProductController extends Controller
     {
         $existingImage=$product->getImage();
 
-       if($existingImage)
-       {
-        $product->setImage(new File($this->getParameter('foggyline_catalog_images_directory').'/'.$existingImage)) ;
-       }
-        $deleteForm = $this->createDeleteForm($product);
+        if($existingImage)
+        {
+            $product->setImage(new File($this->getParameter('foggyline_catalog_images_directory').'/'.$existingImage)) ;
+        }
+        //$deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('Foggyline\CatalogBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            if($user  = $this->getUser())
+            {
+                $product->setUser($user);
+            }
             
             if($image =$product->getImage())
             {
@@ -129,31 +190,37 @@ class ProductController extends Controller
             return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
         }
 
-        return $this->render('product/edit.html.twig', array(
+        return $this->render('FoggylineCatalogBundle:default:product/edit.html.twig', array(
             'product' => $product,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form_edit' => $editForm->createView(),
+          //  'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a product entity.
      *
-     * @Route("/{id}", name="product_delete")
-     * @Method("DELETE")
+     * @Route("/delete", name="product_delete")
+     * @Method("POST")
      */
-    public function deleteAction(Request $request, Product $product)
+    public function deleteAction(Request $request)
     {
-        $form = $this->createDeleteForm($product);
-        $form->handleRequest($request);
+        
+       
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($product);
-            $em->flush();
-        }
+        
+        $product_id = $request->get('product_id');
 
-        return $this->redirectToRoute('product_index');
+       
+        $product =  $em->getRepository('FoggylineCatalogBundle:Product')->findOneBy(array('id'=>$product_id));
+  
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+  
+        return new Response('delete');
     }
 
     /**

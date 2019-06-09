@@ -60,7 +60,7 @@ class CartItem
      * 
      * 
      * @ORM\OneToOne(targetEntity="Foggyline\CatalogBundle\Entity\Product")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
      */
     private $product;
 

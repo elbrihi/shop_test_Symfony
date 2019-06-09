@@ -47,7 +47,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={"image/png","image/jpeg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
+     * @Assert\File(mimeTypes={"image/png","image/jpeg","image/jpg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
      */
     private $image;
     /**

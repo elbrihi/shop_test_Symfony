@@ -49,15 +49,72 @@ class CheckoutController extends Controller
     public function getAddressForm()
     {
         return $this->createFormBuilder()
-            ->add('address_first_name', TextType::class)
-            ->add('address_last_name', TextType::class)
+            ->add('address_first_name', TextType::class,
+             array(
+                 'attr'=>array(
+                            'placeholder'=>"Adress First Name",
+                            'class'=>'form-control billing-address-name'
+                    )
+             )
+            )
+            ->add('address_last_name', TextType::class,
+        
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Adress Last Name",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+             )
             ->add('company', TextType::class)
-            ->add('address_telephone', TextType::class)
-            ->add('address_country', CountryType::class)
-            ->add('address_state', TextType::class)
-            ->add('address_city', TextType::class)
-            ->add('address_postcode', TextType::class)
-            ->add('address_street', TextType::class)
+            ->add('address_telephone', TextType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Mobile number",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
+            ->add('address_country', CountryType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Company",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
+            ->add('address_state', TextType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Adress State",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
+            ->add('address_city', TextType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Adress City",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
+            ->add('address_postcode', TextType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Adress Postal code",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
+            ->add('address_street', TextType::class,
+                array(
+                    'attr'=>array(
+                                'placeholder'=>"Adress Street",
+                                'class'=>'form-control billing-address-name'
+                                )
+                )
+            )
             ->getForm();
 
     }
@@ -87,6 +144,7 @@ class CheckoutController extends Controller
             $checkoutInfo = array();
             $a = $request->get('shipment_method');
             $shipment_method = explode('____',$a);
+            
             $dynamic_rate_sdd = $shipment_method[0];
             $delivery_label_here = $shipment_method[1];
             $delivery_label_price = $shipment_method[2];

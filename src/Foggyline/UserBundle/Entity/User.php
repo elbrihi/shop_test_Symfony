@@ -1,13 +1,9 @@
 <?php
-
 namespace Foggyline\UserBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
-
-
 /**
  * User
  *
@@ -24,28 +20,24 @@ class User Implements UserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
-
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
-
     /**
      * 
      * @ORM\OneToMany(targetEntity="Foggyline\CatalogBundle\Entity\Category", mappedBy="user")
@@ -58,9 +50,7 @@ class User Implements UserInterface, \Serializable
      * 
      */
     private $products ; 
-
     private $plainPassword;
-
     /**
      * 
      * @ORM\Column(name="roles", type="json_array", nullable= true)
@@ -71,11 +61,14 @@ class User Implements UserInterface, \Serializable
      *
      * @return int
      */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * Constructor
      */
@@ -85,7 +78,6 @@ class User Implements UserInterface, \Serializable
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
     /**
      * Set username
      *
@@ -96,10 +88,8 @@ class User Implements UserInterface, \Serializable
     public function setUsername($username)
     {
         $this->username = $username;
-
         return $this;
     }
-
     /**
      * Get username
      *
@@ -109,7 +99,6 @@ class User Implements UserInterface, \Serializable
     {
         return $this->username;
     }
-
     /**
      * Set email
      *
@@ -120,10 +109,8 @@ class User Implements UserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
@@ -133,7 +120,6 @@ class User Implements UserInterface, \Serializable
     {
         return $this->email;
     }
-
     /**
      * Set password
      *
@@ -144,10 +130,8 @@ class User Implements UserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
      * Get password
      *
@@ -172,7 +156,6 @@ class User Implements UserInterface, \Serializable
         return null;
     }
  
-
     /** @see \Serializable::serialize() */
     public function serialize()
     {
@@ -189,6 +172,7 @@ class User Implements UserInterface, \Serializable
     public function getRoles()
     {
         $tempRoles = $this->roles ;
+       
         if(in_array('ROLE_USER',$tempRoles)===false)
         {
             $tempRoles[] = 'USER_ROLE';
@@ -209,7 +193,6 @@ class User Implements UserInterface, \Serializable
     }
    
   
-
     /**
      * Add category
      *
@@ -220,10 +203,8 @@ class User Implements UserInterface, \Serializable
     public function addCategory(\Foggyline\CatalogBundle\Entity\Category $category)
     {
         $this->categories[] = $category;
-
         return $this;
     }
-
     /**
      * Remove category
      *
@@ -233,7 +214,6 @@ class User Implements UserInterface, \Serializable
     {
         $this->categories->removeElement($category);
     }
-
     /**
      * Get categories
      *

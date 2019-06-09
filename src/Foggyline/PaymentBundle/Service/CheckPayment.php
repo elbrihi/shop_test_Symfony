@@ -24,9 +24,7 @@ class CheckPayment{
                     'code' =>'check_payment', 
                   
             )
-          );
-      
-     
+          );  
     }
 }
 

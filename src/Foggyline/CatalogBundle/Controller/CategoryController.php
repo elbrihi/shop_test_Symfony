@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
 use Foggyline\CatalogBundle\Security\CategoryVoter;
+use Symfony\Component\HttpFoundation\Response;
 /**
  * 
  * Category controller.
@@ -25,7 +26,12 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
+       // $user =  $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
+      
+       // $checker =  $this->get('foggyline_catalog.category_fetch')->testSecurityUser();
 
+      
+        
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('FoggylineCatalogBundle:Category')->findAll();
@@ -33,6 +39,18 @@ class CategoryController extends Controller
         return $this->render('FoggylineCatalogBundle:default:category/index.html.twig', array(
             'categories' => $categories,
         ));
+    }
+    /**
+     * Lists all category entities.
+     *
+     * @Route("/fetch", name="category_fetch")
+     */
+    public function fetchAction()
+    {
+        $category = $this->get('foggyline_catalog.category_fetch')->getCategoryData();
+        
+       // return new Response($category);
+       return new Response($category);
     }
 
     /**
@@ -44,27 +62,28 @@ class CategoryController extends Controller
     public function newAction(Request $request)
     {
        
-        
         $category = new Category();
         $image = $category->getImage();
+        
         $form = $this->createForm('Foggyline\CatalogBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
-       
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            
+ 
            /* @var $image \Symfony\Component\HttpFoundation\File\UploadedFile */
            if ($image = $category->getImage()) {
             
             $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
             $category->setImage($name);
             }
-            $category->setImage($name);
-            $category->setUser($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
+            
             $em->flush();
 
-            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            //return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            return new Response('the categoer form was added with succefully!!');
         }
 
         return $this->render('FoggylineCatalogBundle:default:category/new.html.twig', array(
@@ -108,19 +127,19 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        // $category = new  Category();
         
-       $existingImage=$category->getImage();
+        $existingImage=$category->getImage();
 
-       if($existingImage)
-       {
-           $category->setImage(new File($this->getParameter('foggyline_catalog_images_directory').'/'.$existingImage)) ;
-       }       
-        $deleteForm = $this->createDeleteForm($category);
+
+        if($existingImage)
+        {
+            $category->setImage(new File($this->getParameter('foggyline_catalog_images_directory').'/'.$existingImage)) ;
+        }
         $editForm = $this->createForm('Foggyline\CatalogBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
-
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
             if($image = $category->getImage())
             {
                 $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
@@ -131,17 +150,15 @@ class CategoryController extends Controller
               }
             
             $this->getDoctrine()->getManager()->flush();
+            return new Response('the categoer form was eddited with succefully!!');
 
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
         }
 
-        return $this->render('FoggylineCatalogBundle:default:category/edit.html.twig', array(
+        return $this->render('FoggylineCatalogBundle:default:category/edit.html.1.twig', array(
             'category' => $category,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form_edit' => $editForm->createView(),
         ));
     }
-
     /**
      * Deletes a category entity.
      *

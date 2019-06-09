@@ -17,7 +17,7 @@ class Product
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="product_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -26,7 +26,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="product_title", type="string", length=255)
      */
     private $title;
 
@@ -81,7 +81,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="product_image", type="string", length=255)
      *@Assert\File(mimeTypes={"image/png","image/jpeg","image/jpg"}, mimeTypesMessage="Please upload the PNG or JPEG image file")
      */
     
