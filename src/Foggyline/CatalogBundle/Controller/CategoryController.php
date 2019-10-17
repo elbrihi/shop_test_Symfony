@@ -30,8 +30,7 @@ class CategoryController extends Controller
       
        // $checker =  $this->get('foggyline_catalog.category_fetch')->testSecurityUser();
 
-      
-        
+       
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('FoggylineCatalogBundle:Category')->findAll();

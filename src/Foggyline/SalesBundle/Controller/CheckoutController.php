@@ -10,8 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Foggyline\SalesBundle\Entity\Cart;
 use Foggyline\SalesBundle\Entity\SalesOrder;
 use Foggyline\SalesBundle\Entity\SalesOrderItem;
+use Foggyline\PaymentBundle\Controller\CardController;
+
+
 class CheckoutController extends Controller
 {
+
     public function indexAction():Response
     {
         if($customer = $this->getUser()  )
@@ -157,7 +161,6 @@ class CheckoutController extends Controller
             $checkoutInfo['shipment_price'] = $delivery_label_price ;
             $checkoutInfo['dynamic_rate_Sdd'] = $dynamic_rate_sdd ;
             $checkoutInfo['totale_price'] = $order_totale ;
-
             
         }
        
@@ -180,6 +183,18 @@ class CheckoutController extends Controller
     }
     public function processAction(Request $request)
     {
+       
+        
+        $payment = new CardController();
+
+        $checkoutInfo =  $this->get('session')->get('checkoutInfo')['order_totale']* 100;
+        
+        
+        $id_token = $payment->authorizeAction($request,$checkoutInfo)['charge']['id'];
+         
+      
+
+      
         if($customer = $this->getUser() )
         { 
            
@@ -210,11 +225,9 @@ class CheckoutController extends Controller
             $salesOrder->setAdressLastName($checkoutInfo['infoForm']['address_street']);
             $salesOrder->setAdressCountry($checkoutInfo['infoForm']['address_country']);
             $salesOrder->setAdressTelephone($checkoutInfo['infoForm']['address_telephone']);
+            $salesOrder->setIdToken($id_token);
             $salesOrder->setCreatedAt($now);
             $salesOrder->setModifiedAt($now);
-            echo '<pre>';
-            print_r($checkoutInfo);
-            echo '</pre>';
             $em->persist($salesOrder);
             $em->flush();//
             $salesOrderId =  $salesOrder->getId();
