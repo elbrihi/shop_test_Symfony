@@ -47,18 +47,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="wrapper_top_w3layouts">
 			<div class="header_agileits">
 				<div class="logo inner_page_log">
-					<h1><a class="navbar-brand" href="index.html"><span>Downy</span> <i>Shoes</i></a></h1>
+				       {{ path('homepage') }}
+					<h1><a class="navbar-brand" href="{{ path('homepage') }}"><span>Downy</span> <i>Shoes</i></a></h1>
 				</div>
 				<div class="overlay overlay-contentpush">
 					<button type="button" class="overlay-close"><i class="fa fa-times" aria-hidden="true"></i></button>
 
 					<nav>
 						<ul>
-							<li><a href="index.html" class="active">Home</a></li>
-							<li><a href="about.html">About</a></li>
+							<li><a href="{{path('homepage')}}" class="active">Home</a></li>
+							<li><a href="{{ path('about') }}">About</a></li>
 							<li><a href="404.html">Team</a></li>
-							<li><a href="shop.html">Shop Now</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="{{ path('homepage')}}">Shop Now</a></li>
+							<li><a href="{{ path('contact')}}">Contact</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -99,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="inner_breadcrumb_agileits_w3">
 
 				<ul class="short">
-					<li><a href="index.html">Home</a><i>|</i></li>
+					<li><a href="{{  path('homepage')}}">Home</a><i>|</i></li>
 					{% block category_menu %}
 						{% for link in category_menu.getItems() %}
 						<li><a href="{{ link.path }}">{{ link.label }}</a><i>|</i></li>

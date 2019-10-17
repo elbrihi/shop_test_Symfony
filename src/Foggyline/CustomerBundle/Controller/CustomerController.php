@@ -103,9 +103,7 @@ class CustomerController extends Controller
 
            }
            $etems = $this->get('foggyline_sales.customer_orders')->getOrders();
-           //echo '<pre>';
-           print_r($etems);
-           //die;
+         
            return $this->render('FoggylineCustomerBundle:default:customer/account.html.twig',
                     array(
                         'customer'=>$customer,

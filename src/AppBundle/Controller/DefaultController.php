@@ -23,10 +23,6 @@ class DefaultController extends Controller
         
         $checkout = $this->get('foggyline_sales.checkout_menu');
 
-        //echo '<pre>';
-        //print_r($checkout->getItems());
-        //echo '</pre>';
-        //die;
         return $this->render('AppBundle:default:index.html.twig');
     }
     /**
