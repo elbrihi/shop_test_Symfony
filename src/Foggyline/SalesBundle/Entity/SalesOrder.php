@@ -24,6 +24,7 @@ class SalesOrder
      */
     private $id;
 
+
      /**
      * @ORM\ManyToOne(targetEntity="Foggyline\CustomerBundle\Entity\Customer")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
@@ -168,6 +169,13 @@ class SalesOrder
      * @ORM\OneToMany(targetEntity="SalesOrderItem",mappedBy="salesOrder")
      */
     private $items;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="id_token", type="string", length=255)
+     */
+    private $idToken;
     public function __construct()
     {
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
@@ -662,6 +670,16 @@ class SalesOrder
     public function getAdressTelephone()
     {
         return $this->adressTelephone;
+    }
+
+    public function setIdToken($idToken)
+    {
+        $this->idToken = $idToken;
+    }
+
+    public function getIdToken()
+    {
+        return $this->idToken;
     }
     
 

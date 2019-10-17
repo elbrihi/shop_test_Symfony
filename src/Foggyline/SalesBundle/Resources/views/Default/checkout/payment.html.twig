@@ -127,33 +127,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- // banner -->
 
 		<!-- top Products -->
-			{{ dump(payment_methods) }}
+			{#{ dump(payment_methods) }#}
 
 	  <!--  Test  -->
-		<form action="{{ path('foggyline_sales_checkout_process') }}" method="post" id="payment_form">
-			<fieldset>
-				<legend>Payment Methods</legend>
-				<ul>
-					{% for method in payment_methods %}
-						{% set payment = method.getInfo()['payment'] %}
-							<li>
-								<input type="radio" name="payment_method" value="{{ payment.code }}"> {{ payment.title }}
-
-								{% if payment['form'] is defined %}
-									<div id="{{ payment.code }}_form">
-										{{ form_widget(payment['form']) }}
-									</div>
-								{% endif %}
-							</li>
-					{% endfor %}
-				</ul>
-			</fieldset>
-		</form>
+		
 	  <!--  End Test  -->
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<div class="privacy about">
-				<h3>Pay<span>ment</span></h3>
+				<h3>Pay<span>ment</span></h3> <h2 class="my-4 text-center">Intro To React Course [$1250]</h2>
 				<!--/tabs-->
 				<div class="responsive_tabs">
 					<div id="horizontalTab">
@@ -187,44 +169,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							{% if payment['form'] is defined %}
 							<div class="tab2">
 								<div class="pay_info">
-									<form action="{{ path('foggyline_sales_checkout_process') }}" method="post" class="creditly-card-form agileinfo_form">
+									<form action="{{ path('foggyline_sales_checkout_process') }}" method="post" class="creditly-card-form agileinfo_form" id="payment-form">
 										<section class="creditly-wrapper wthree, w3_agileits_wrapper">
 											<div class="credit-card-wrapper">
 												<div class="first-row form-group">
 													<div class="controls">
 														<label class="control-label">Name on Card</label>
-														<input class="billing-address-name form-control" type="text" name="name" placeholder="John Smith">
-
+														{{ form_widget(payment['form'].cardType)}}
+														<!--input class="billing-address-name form-control" type="text" name="name" placeholder="John Smith"-->
 													</div>
 													<div class="w3_agileits_card_number_grids">
-														<div class="w3_agileits_card_number_grid_left">
-															<div class="controls">
-																<label class="control-label">Card Number</label>
-																<!--input class="number credit-card-number form-control" type="text" name="number" inputmode="numeric" autocomplete="cc-number"
-																    autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;"-->
-																
-																{{ form_widget(payment['form'].cardNumber)}}
-															</div>
-														</div>
-														<div class="w3_agileits_card_number_grid_right">
-															<div class="controls">
-																<label class="control-label">CVV</label>
-																<!--input class="security-code form-control" Â· inputmode="numeric" type="text" name="security-code" placeholder="&#149;&#149;&#149;"-->
-																{{ form_widget(payment['form'].securityCode)}}
-															</div>
-														</div>
+													
 														<div class="clear"> </div>
 													</div>
-													<div class="controls">
-														<label class="control-label">Expiration Date</label>
-														<!--input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY"-->
-														{{ form_widget(payment['form'].expirtyDate)}}
-													</div>
-														<input class="expiration-month-and-year form-control"   name="payment_method" value="{{ payment.code }}" type="hidden"  >
+												
+														<input class=""   name="payment_method" value="{{ payment.code }}" type="hidden"  >
 												</div>
+												
+												<div id="card-element" class="form-control">
+												    <!-- a Stripe Element will be inserted here. -->
+												</div>
+
 												<button type='submit' ><span>Make a payment </span></button>
 
 											</div>
+
 										</section>
 									</form>
 								</div>
@@ -504,7 +473,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		});
 	</script>
 	<!-- //credit-card -->
+		<script src="https://js.stripe.com/v3/"></script>
 
+     <script type="text/javascript" src="{{asset('js/vendor/charge.js')}}"></script>
 
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{{asset('js/vendor/move-top.js')}}"></script>
@@ -521,6 +492,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script>
 	<!-- //end-smoth-scrolling -->
 	<script type="text/javascript" src="{{asset('js/vendor/bootstrap-3.1.1.min.js')}}"></script>
+
+
 </body>
 
 </html>

@@ -24,6 +24,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
+        
         $request = new Request();
         $user = $this->get('foggyline_user.fetch_user')->get_total_all_records();
         
