@@ -92,7 +92,7 @@ class ProductController extends Controller
      */
     public function addAction(Request $request)
     {
-        
+       
         $product = new Product();
         $image = $product->getImage();
        

@@ -60,6 +60,8 @@ class CategoryController extends Controller
      */
     public function newAction(Request $request)
     {
+
+      
        
         $category = new Category();
         $image = $category->getImage();
@@ -85,7 +87,7 @@ class CategoryController extends Controller
             return new Response('the categoer form was added with succefully!!');
         }
 
-        return $this->render('FoggylineCatalogBundle:default:category/new.html.twig', array(
+        return $this->render('FoggylineCatalogBundle:default:category/new.html.1.twig', array(
             'category' => $category,
             'form' => $form->createView(),
         ));

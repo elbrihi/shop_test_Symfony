@@ -321,7 +321,7 @@
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 									<div class="row" align="right">
-										<button type="button" name="add" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-success btn-xs">Add</button>   		
+										<button type="button" name="add" id="add_button" data-toggle="modal" data-target="#categoryModal" class="btn btn-success btn-xs ">Add</button>   		
 									</div>
 								</div>
 								<div style="clear:both"></div>
@@ -346,9 +346,10 @@
 						</div>
 					</div>
 				</div>
-                <div id="userModal" class="modal fade">
-                    <div class="form-add-modal"></div>
+                <div id="categoryModal" class="modal fade">
+                    <div class="form-add-modal"> Hello World</div>
                 </div>
+                
                 <div id="editModal" class="modal fade">
                     <div class="form-edit-modal">
                     </div>
@@ -489,21 +490,26 @@
 			})
 		});
 
+        
         $(document).on('click', '#add_button', function(){
            //var user_id = $(this).attr('id');
+          /* console.dir(this);
            var data = new FormData(this);
-           console.log(data);
+
+           console.log(data);*/
             $.ajax({
-               	url:'{{ (path('foggyline_catalog_add_catalog_category')) }}',
+               	//url:'{{ (path('foggyline_catalog_add_catalog_category')) }}',
+                url:'{{ (path('category_new')) }}',
 				type:"POST",
-                data: data, 
+                //data: data, 
                 contentType:false,
                 processData:false,
                 cache: false,
                 success:function(data)
                 {   
                     console.log(data);
-                    $('.form-add-modal').html(data);
+                     $('#editModal').modal('show');
+                     $('.form-add-modal').html(data);
                 }
             });
         });

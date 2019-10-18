@@ -321,7 +321,7 @@
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 									<div class="row" align="right">
-										<button type="button" name="add" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-success btn-xs">Add</button>   		
+										<button type="button" name="add" id="add_button" data-toggle="modal" data-target="#productModal" class="btn btn-success btn-xs">Add</button>   		
 									</div>
 								</div>
 								<div style="clear:both"></div>
@@ -348,7 +348,7 @@
 						</div>
 					</div>
 				</div>
-                <div id="userModal" class="modal fade">
+                <div id="productModal" class="modal fade">
                     <div class="form-add-modal"></div>
                 </div>
                 <div id="editModal" class="modal fade">
@@ -491,18 +491,20 @@
 
         $(document).on('click', '#add_button', function(){
            //var user_id = $(this).attr('id');
-           var data = new FormData(this);
-           console.log(data);
+           //var data = new FormData(this);
+            //console.log(data);
+            console.log('jjjjjjjjjjjjj');
             $.ajax({
                	url:'{{ (path('product_add')) }}',
 				type:"POST",
-                data: data, 
+                //data: data, 
                 contentType:false,
                 processData:false,
                 cache: false,
                 success:function(data)
                 {   
                     console.log(data);
+                    $('#editModal').modal('show');
                     $('.form-add-modal').html(data);
                 }
             });
@@ -519,8 +521,8 @@
 				data:form_data,
 				success:function(data)
 				{
-					$('#category_form')[0].reset();
-					$('#categoryModal').modal('hide');
+					$('#product_form')[0].reset();
+					$('#productModal').modal('hide');
 					$('#alert_action').fadeIn().html('<div class="alert alert-success">'+data+'</div>');
 					$('#action').attr('disabled', false);
 					categorydataTable.ajax.reload();
