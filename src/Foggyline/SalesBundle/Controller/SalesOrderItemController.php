@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class SalesOrderItemController extends Controller
 {
+    
     /**
      * Lists all salesOrderItem entities.
      *
@@ -30,6 +31,8 @@ class SalesOrderItemController extends Controller
             'salesOrderItems' => $salesOrderItems,
         ));
     }
+    
+
 
     /**
      * Creates a new salesOrderItem entity.

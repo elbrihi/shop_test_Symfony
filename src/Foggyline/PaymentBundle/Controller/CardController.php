@@ -1,7 +1,12 @@
 <?php
 
 // ch_1FUaz7KllW0HmHqaOSIIkvNW
+// phar://C:/composer/composer.phar/src/Composer/DependencyResolver/Solver.php
+//created PHP PAyment that accepts crdit cart using the stripe API and also stotes in Database by using Doctrine and creating transactions to store it in the Data base 
 
+
+//git commit --amend -m "created PHP PAyment that accepts crdit cart using the stripe API and also stotes in Database by using Doctrine and creating transactions to store it in the Data base 
+//"
 namespace Foggyline\PaymentBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,7 +42,19 @@ class CardController extends Controller
         ));
         //id
         return array('charge'=>$charge, 'customer'=> $customer);
+        die;
         
+        
+        /*$transaction = md5(time() . uniqid()); // Just a dummy string, simulating some transaction id, if any
+        if ($transaction) {
+            return new JsonResponse(array(
+                'success' => $transaction
+                
+            ));
+        }
+        return new JsonResponse(array(
+            'error' => 'Error occurred while processing Card payment.'
+        ));*/
     }
     public function captureAction(Request $request):Response
     {

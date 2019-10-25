@@ -70,7 +70,8 @@ security:
             #anonymous: ~
     
     access_control:
-        #user/1/edit
+        
+       #user/1/edit
        #- {path:  /new, roles: ROLE_USER}
        #- {path:  /edit, roles: ROLE_USER}
        #- {path:  /, roles: ROLE_USER, methods: [DELETE] }
@@ -90,7 +91,7 @@ security:
        #- { path: customer/logout, roles: ROLE_USER }
 
        #   Test #
-
+        #- { path: /fetch, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /new, roles: ROLE_ADMIN }
         - { path: /edit, roles: ROLE_ADMIN }   
         - { path: /fetch, roles: ROLE_ADMIN }

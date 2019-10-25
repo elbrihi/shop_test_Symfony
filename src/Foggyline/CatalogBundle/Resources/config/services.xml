@@ -5,8 +5,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     
-    <services>
 
+    <services>
+    
         <service id="foggyline_catalog.image_uploader" class="Foggyline\CatalogBundle\Service\ImageUploader">
             <argument>%foggyline_catalog_images_directory%</argument>
         </service>
@@ -36,6 +37,10 @@
         <service id="foggyline_catalog.onSale" class="Foggyline\CatalogBundle\Service\Menu\OnSale">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="router" />
+            <argument type="service" id="add_to_cart_url" />
+            <argument type="service" id="knp_paginator" />
+
+
         </service>
 
         <service id="foggyline_catalog.category_voter" class="Foggyline\CatalogBundle\Security\CategoryVoter">

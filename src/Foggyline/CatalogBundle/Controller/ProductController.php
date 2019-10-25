@@ -85,7 +85,7 @@ class ProductController extends Controller
             'form' => $form->createView(),
         ));
     }
-       /**
+    /**
      * Creates a new product entity.
      *
      * @Route("/add", name="product_add")
@@ -151,7 +151,7 @@ class ProductController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+     
     /**
      * Displays a form to edit an existing product entity.
      *
