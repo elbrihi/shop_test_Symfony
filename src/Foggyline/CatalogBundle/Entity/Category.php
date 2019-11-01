@@ -23,6 +23,13 @@ class Category
     private $id;
 
     /**
+     *@var int
+     * 
+     *@ORM\Column(name="parent_category_id",type="integer") 
+     */
+    private $parentCategoryId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -64,6 +71,7 @@ class Category
     public function __construct()
     {
         $this->products =  new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
         
     }
     /**
@@ -90,6 +98,32 @@ class Category
     {
         return $this->id;
     }
+    // sub-cathegory
+
+     /**
+     * Set parentCategoryId
+     *
+     * @param int $parent_category_id
+     *
+     * @return Category
+     */
+    public function setParentCategoryId($parentCategoryId)
+    {
+        $this->parentCategoryId = $parentCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Get parentCategoryId
+     *
+     * @return int
+     */
+    public function getParentCategoryId()
+    {
+        return $this->parentCategoryId;
+    }
+    // sub-category
 
     /**
      * Set title
@@ -191,7 +225,7 @@ class Category
      * 
      * @return category 
      */
-    public function setUser(\Foggyline\UserBundle\Entity\User $user=null)
+    public function setUser(\Foggyline\UserBundle\Entity\User $user)
     {
         $this->user = $user;
 

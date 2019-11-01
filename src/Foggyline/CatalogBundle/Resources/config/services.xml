@@ -21,6 +21,14 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="security.authorization_checker" />
+            <argument type="service" id="security.token_storage" />
+        </service>
+
+        <service id="foggyline_catalog.subcategory_fetch" class="Foggyline\CatalogBundle\Service\Menu\FetchSubCategory">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="security.authorization_checker" />
+            <argument type="service" id="security.token_storage" />
         </service>
 
         <service id="foggyline_product.product_fetch" class="Foggyline\CatalogBundle\Service\Menu\FetchProduct">
@@ -39,8 +47,6 @@
             <argument type="service" id="router" />
             <argument type="service" id="add_to_cart_url" />
             <argument type="service" id="knp_paginator" />
-
-
         </service>
 
         <service id="foggyline_catalog.category_voter" class="Foggyline\CatalogBundle\Security\CategoryVoter">

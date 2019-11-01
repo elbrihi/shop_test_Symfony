@@ -405,6 +405,7 @@
 <script src="{{ asset('js/vendor_admin/bootstrap.js')}}"> </script>
 
 <script>
+        fetchDataCategory();
         $('#add_button').click(function(){
 			$('#user_form')[0].reset();
 			$('.modal-title').html("<i class='fa fa-plus'></i> Add User");
@@ -507,7 +508,6 @@
                 cache: false,
                 success:function(data)
                 {   
-                    console.log(data);
                      $('#editModal').modal('show');
                      $('.form-add-modal').html(data);
                 }
@@ -583,8 +583,8 @@
 				return false;
 			}
        });
-       foo();
-       function foo()
+      
+       function fetchDataCategory()
        {
            console.log('hello');
            var url = "{{ path('foggyline_catalog_fetch_catalog_category') }}";

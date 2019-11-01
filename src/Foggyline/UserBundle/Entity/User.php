@@ -50,6 +50,7 @@ class User Implements UserInterface, \Serializable
      * 
      */
     private $products ; 
+    
     private $plainPassword;
     /**
      * 

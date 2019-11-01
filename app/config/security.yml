@@ -40,7 +40,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         foggyline_user:
-            pattern: ^/(user|store_manager|category|product|catalog)
+            pattern: ^/(user|store_manager|category|product|catalog|subcategory)
             anonymous: ~
             provider: foggyline_user
             form_login:
